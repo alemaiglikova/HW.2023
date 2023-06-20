@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <form action="/add" method="POST">
+        <input type="text" name="title" placeholder="Введите задачу">
+        <input type="submit" value="Добавить">
+    </form>
+    <ul>
+        {% for task in tasks %}
+        <li>{{ task.title }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
