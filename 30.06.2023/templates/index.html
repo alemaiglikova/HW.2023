@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Записная книжка</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Записная книжка</h1>
+
+    <h2>Добавить новую задачу:</h2>
+    <form action="/add" method="post">
+        <label for="title">Заголовок:</label>
+        <input type="text" id="title" name="title" required><br>
+        <label for="description">Описание:</label>
+        <textarea id="description" name="description"></textarea><br>
+        <input type="submit" value="Добавить">
+    </form>
+
+    <h2>Список задач:</h2>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <span class="task-title">{{ task.title }}</span>
+                {% if task.description %}
+                    <span class="task-description">{{ task.description }}</span>
+                {% endif %}
+                [<a href="/delete/{{ task.id }}">Удалить</a>]
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
