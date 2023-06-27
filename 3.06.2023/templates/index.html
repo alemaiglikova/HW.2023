@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Система рейтинга комментариев</title>
+    <style>
+        .comment {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .comment-content {
+            font-weight: bold;
+        }
+
+        .comment-rating {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Система рейтинга комментариев</h1>
+    <div>
+        {% for comment in comments %}
+            <div class="comment">
+                <p class="comment-content">{{ comment['content'] }}</p>
+                <p class="comment-rating">Рейтинг: {{ comment['rating'] }}</p>
+                <form method="POST" action="/">
+                    <input type="hidden" name="comment_id" value="{{ comment['id'] }}">
+                    <button type="submit" name="rating_type" value="like">Нравится</button>
+                    <button type="submit" name="rating_type" value="dislike">Не нравится</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

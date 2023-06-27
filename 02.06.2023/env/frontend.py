@@ -9,7 +9,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Валютный калькулятор')
         self.setGeometry(200, 200, 300, 200)
 
-      
+
         widget = QWidget()
         layout = QVBoxLayout()
         widget.setLayout(layout)
