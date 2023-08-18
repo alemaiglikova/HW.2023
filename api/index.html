@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Currency Value</title>
+</head>
+<body>
+    <h1>Random Currency Value</h1>
+    <p>Click the button to get a random currency value:</p>
+    <button id="getRandomValue">Get Random Value</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('getRandomValue').addEventListener('click', () => {
+            fetch('/api/valute')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('result').textContent = `Currency: ${data.currency}, Value: ${data.value}`;
+                });
+        });
+    </script>
+</body>
+</html>
