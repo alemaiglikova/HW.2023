@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Ideas List</h1>
+  <ul>
+    {% for idea in ideas %}
+      <li>{{ idea.1 }} - {{ idea.2 }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
