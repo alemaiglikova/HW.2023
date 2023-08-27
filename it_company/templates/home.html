@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Компания</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">IT Компания</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">О нас</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact/">Контакты</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8">
+        <h1>Добро пожаловать в IT Компанию</h1>
+        <p>Мы предоставляем широкий спектр IT-услуг для вашего бизнеса.</p>
+        <h2>Наши Услуги</h2>
+        <ul>
+          {% for service in services %}
+            <li>{{ service.title }} - {{ service.description }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h2>Наша Команда</h2>
+        <div class="row">
+          {% for team_member in team_members %}
+            <div class="col-md-6 mb-4">
+              <img src="{{ team_member.photo.url }}" alt="{{ team_member.name }}" class="img-fluid">
+              <h4>{{ team_member.name }}</h4>
+              <p>{{ team_member.position }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
