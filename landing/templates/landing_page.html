@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+<link rel="stylesheet" href="{% static 'tourism-styles.css' %}">
+<script src="{% static 'tourism-scripts.js' %}"></script>
+<title>Туристическая Компания</title>
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="container">
+        <a href="#" class="logo">TravelX</a>
+        <ul class="nav-list">
+          <li><a href="#">Главная</a></li>
+          <li><a href="#">Туры</a></li>
+          <li><a href="#">О нас</a></li>
+          <li><a href="#">Контакты</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="hero">
+      <div class="container">
+        <h1>Откройте для себя мир с нами</h1>
+        <p>Путешествия, которые оставят след в вашем сердце</p>
+        <a href="#" class="cta-button">Выбрать тур</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="featured-tours">
+    <div class="container">
+      <h2>Популярные туры</h2>
+      <div class="tour-card">
+        <img src="{% static 'tour1.jpg' %}" alt="Тур 1">
+        <h3>Экзотический отдых на Мальдивах</h3>
+        <p>Незабываемый отдых на белоснежных пляжах Мальдивского архипелага.</p>
+      </div>
+      <div class="tour-card">
+        <img src="{% static 'tour2.jpg' %}" alt="Тур 2">
+        <h3>Путешествие по Италии</h3>
+        <p>Исследуйте красоты Италии - от Рима до Венеции.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">TravelX</div>
+      <ul class="footer-nav">
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">Туры</a></li>
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Контакты</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>
