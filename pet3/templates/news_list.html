@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список новостей</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+    <h1 class="my-4">Список новостей</h1>
+    <ul class="list-group">
+        {% for news in news_list %}
+            <li class="list-group-item">
+                <h5 class="mb-1">{{ news.title }}</h5>
+                <small class="text-muted">Автор: {{ news.author.username }}, Дата создания: {{ news.created_at }}</small>
+                <p class="mb-1">{{ news.content }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
