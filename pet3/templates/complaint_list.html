@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список жалоб</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container">
+    <h1 class="my-4">Список жалоб</h1>
+    <ul class="list-group">
+        {% for complaint in complaints %}
+            <li class="list-group-item">
+                <h5 class="mb-1">Жалоба от {{ complaint.user.username }}</h5>
+                <small class="text-muted">Дата создания: {{ complaint.created_at }}</small>
+                <p class="mb-1">{{ complaint.content }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
