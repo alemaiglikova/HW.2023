@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Умная колонка с дисплеем</title>
+</head>
+<body>
+
+<h1>Сообщения</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Отправить</button>
+</form>
+
+<ul>
+    {% for message in messages %}
+        <li>{{ message.content }}</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
