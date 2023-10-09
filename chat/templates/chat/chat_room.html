@@ -1,0 +1,50 @@
+{% extends 'chat/base.html' %}
+
+{% block content %}
+    <h1>Chat with {{ user.username }}</h1>
+    <div id="chat">
+        {% for message in messages %}
+            <div>
+                <strong>{{ message.sender.username }}:</strong> {{ message.content }}
+            </div>
+        {% endfor %}
+    </div>
+    <form id="messageForm">
+        {% csrf_token %}
+        <input type="text" id="messageInput" autocomplete="off">
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('messageForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const input = document.getElementById('messageInput');
+                const content = input.value.trim();
+                if (content) {
+                    const username = '{{ user.username }}';
+                    const csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+                    fetch(`/${username}/send_message/`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRFToken': csrf_token
+                        },
+                        body: `content=${content}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const chat = document.getElementById('chat');
+                            const messageDiv = document.createElement('div');
+                            messageDiv.innerHTML = `<strong>You:</strong> ${content}`;
+                            chat.appendChild(messageDiv);
+                            input.value = '';
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}
