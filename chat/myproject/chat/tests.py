@@ -38,3 +38,8 @@ class NotificationTests(TestCase):
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), 'Notification message text')
+
+    def test_notification_template(self):
+        self.client.login(username='user1', password='password123')
+        response = self.client.get(reverse('some_view_that_generates_notification'))
+        self.assertContains(response, 'Notification message text')
