@@ -1,7 +1,11 @@
-from django_app.models import Person
+from django.contrib.auth.decorators import login_required
 
+from django_app.models import Person, Article, Author, PublicModel, UserProfile
+from django.shortcuts import render
+from django_app.models import RestrictedModel
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from myapp.models import Person
+from django_app.models import Person
 from django.shortcuts import render
 
 
@@ -68,4 +72,47 @@ new_people = [
 ]
 Person.objects.bulk_create(new_people)
 
+author = Author.objects.select_related('book').get(id=1)
+books = author.book.all()
 
+authors = Author.objects.prefetch_related('book_set').all()
+articles = Article.objects.select_related('tags').all()
+
+articles = Article.objects.prefetch_related('tags').all()
+
+person = Person.objects.select_related('profile').get(id=1)
+profile = person.profile
+
+people = Person.objects.prefetch_related('profile').all()
+
+
+
+def public_data(request):
+    public_data = PublicModel.objects.all()
+    return render(request, 'public_data.html', {'public_data': public_data})
+
+@login_required
+def authenticated_no_restrictions_data(request):
+    data = RestrictedModel.objects.all()
+    return render(request, 'authenticated_no_restrictions_data.html', {'data': data})
+
+@login_required
+def own_data(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    return render(request, 'own_data.html', {'user_profile': user_profile})
+
+@login_required
+def restricted_data(request):
+    if request.user.is_staff:
+        data = RestrictedModel.objects.all()
+    else:
+        data = None
+    return render(request, 'restricted_data.html', {'data': data})
+
+@login_required
+def group_based_data(request):
+    if request.user.groups.filter(name='Special Group').exists():
+        data = RestrictedModel.objects.all()
+    else:
+        data = None
+    return render(request, 'group_based_data.html', {'data': data})
