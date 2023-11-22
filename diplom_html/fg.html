@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>{{ work.title }}</h2>
+    <p>{{ work.description }}</p>
+    <!-- Добавляем кнопку "Отклики" -->
+    <button class="btn btn-primary" id="showResponses">Отклики</button>
+    <!-- Форма для отправки откликов -->
+    <form id="responseForm" action="{% url 'submit_response' work.pk %}" method="post">
+      {% csrf_token %}
+      <select name="vacancy">
+        {% for vacancy in user_vacancies %}
+          <option value="{{ vacancy.pk }}">{{ vacancy.vacancy }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn btn-primary">Отправить отклик</button>
+    </form>
+  </div>
+  
+  <!-- Модальное окно для вывода списка откликов -->
+  <div class="modal fade" id="responsesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Отклики на вакансию</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="responsesList">
+          <!-- Здесь будут отображаться отклики -->
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script>
+    // JavaScript для открытия модального окна с откликами
+    document.getElementById('showResponses').addEventListener('click', function() {
+      $('#responsesModal').modal('show');
+      // Здесь можно добавить AJAX-запрос для загрузки списка откликов
+    });
+    
+    // JavaScript для отправки отклика
+    document.getElementById('responseForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var form = this;
+      var data = new FormData(form);
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', form.action, true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          alert('Отклик успешно отправлен!');
+        } else {
+          alert('Произошла ошибка при отправке отклика');
+        }
+      };
+      xhr.send(data);
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Название вашего сайта</title>
+    <!-- Подключаем Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <!-- Подключаем Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Подключаем стили для иконок Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Стили для хедера */
+        .navbar {
+            background-color: #007bff !important; /* Синий цвет хедера */
+        }
+        .navbar-brand {
+            font-family: 'Roboto', sans-serif; /* Используем Google Fonts */
+            color: #fff; /* Белый цвет текста */
+        }
+        .navbar-nav .nav-link {
+            color: #fff; /* Белый цвет текста */
+        }
+        .centered-text {
+            text-align: center;
+        }
+        .business-idea {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .like-button {
+            position: relative;
+            left: 830px;
+        }
+
+        .like-button i {
+            position: absolute;
+            bottom: 5px;
+            right: -20px;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Название вашего сайта</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="business_projects.html">Бизнес-проекты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Вакансии</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Резюме</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="upload_products.html">Товары из 1С</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Чат</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Новости</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Вход</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Регистрация</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Блок с бизнес-идеями -->
+    <div class="container mt-4">
+        <h1 class="mb-3 centered-text">Бизнес-проекты</h1>
+        <p>Если у вас есть бизнес идеи, то обязательно поделитесь с нами</p>
+        <!-- Ссылка для перехода на страницу публикации идей -->
+        <a href="{% url 'publish_idea' %}" class="btn btn-primary">Поделиться идеей</a>
+
+        <!-- Список бизнес-идей -->
+        <ul>
+            {% for idea in business_ideas %}
+                <li class="business-idea">
+                    <h3>{{ idea.name }}</h3>
+                    <p>{{ idea.description }}</p>
+                    <a href="{% url 'idea_details' idea.id %}">Подробнее</a>
+                    <button class="btn btn-primary like-button">
+                        Нравится
+                        <i class="fas fa-thumbs-up"></i> <!-- Иконка лайка -->
+                    </button>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Подключаем Bootstrap JS и скрипты для работы -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
