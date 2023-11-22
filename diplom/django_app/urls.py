@@ -1,5 +1,7 @@
 from django.conf.urls.static import static
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include
+from django.views.generic import TemplateView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework.routers import DefaultRouter
@@ -51,6 +53,13 @@ urlpatterns = [
     path('edit_work/<int:pk>/', views.edit_work, name='edit_work'),
     path('submit_response/<int:work_id>/', views.submit_response, name='submit_response'),
     path('work_responses/<int:work_id>/', views.work_responses, name='work_responses'),
+path('your-protected-page/', login_required(TemplateView.as_view(template_name='your_protected_page.html'))),
+
+    path('api/communicate/', views.communicate, name='communicate'),
+    path('api/products/', views.get_products, name='get_products'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
     # ...
 
     path('create_room/', views.create_room, name='create_room'),
@@ -63,12 +72,7 @@ urlpatterns = [
 
 
 
-    path('api/communicate/', views.communicate, name='communicate'),
-    path('api/products/', views.get_products, name='get_products'),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-    # маршрут 1 api/communicat-будет вызывать функцию create
 
 ]
 
@@ -77,3 +81,5 @@ if settings.DEBUG:
 websocket_urlpatterns = [
     path('ws/<slug:room_name>/', views_a.ChatConsumer.as_asgi())
 ]
+
+

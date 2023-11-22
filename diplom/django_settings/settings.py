@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'daphne',
     'channels',
+    'drf_yasg',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+
 
 ]
 
@@ -194,4 +196,3 @@ ADMIN_INTERFACE_CONFIG = {
     'LIST_FILTER': ['color', 'date'],
     'SEARCH_FIELDS': ['owner__username'],
 }
-
