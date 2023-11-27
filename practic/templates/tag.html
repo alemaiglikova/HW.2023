@@ -1,0 +1,15 @@
+<!-- template_with_filters_and_tags.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ title|title }} - {{ some_variable }}</h1>
+
+  <!-- Использование встроенных тегов и фильтров -->
+  <p>{{ some_text|default:"No text available" }}</p>
+  <p>{{ some_number|add:10 }}</p>
+
+  <!-- Самостоятельные теги и фильтры -->
+  <p>{% my_custom_tag some_variable %}</p>
+  <p>{{ some_text|my_custom_filter }}</p>
+{% endblock %}

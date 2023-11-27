@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Comments for {{ post.title }}</h2>
+  {% for comment in comments %}
+    <p>{{ comment.text }} by {{ comment.author.username }} at {{ comment.created_at }}</p>
+  {% endfor %}
+{% endblock %}
